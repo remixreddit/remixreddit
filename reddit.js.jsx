@@ -50,7 +50,11 @@ var StoryList = React.createClass({
   render: function() {
     // console.log("this.props.stories");
     // console.log(this.props.stories);
+
+    var indexNumber = 0;
     var storyNodes = _.compact(_.map(this.props.stories, function(story) {
+      indexNumber += 1;
+
       try {
         // var imageInfo = story.data.preview.images[0].source.url;
         return <Story key={story.data.id} story={story.data} indexNumber={indexNumber} />;
@@ -58,7 +62,6 @@ var StoryList = React.createClass({
       catch (e) {
         return null;
       }
-
     }));
 
     // console.log("storyNodes");
