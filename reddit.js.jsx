@@ -51,10 +51,20 @@ var StoryList = React.createClass({
     // console.log("this.props.stories");
     // console.log(this.props.stories);
     var indexNumber = 0;
-    var storyNodes = _.map(this.props.stories, function(story) {
+
+    var storyNodes = _.compact(_.map(this.props.stories, function(story) {
       indexNumber += 1;
-      return <Story story={story.data} indexNumber={indexNumber} />;
-    });
+      // Select image version
+      // if (story.data.media_embed != null && story.data.media_embed.content != null) {
+        return <Story story={story.data} indexNumber={indexNumber} />;
+      // }
+      // else {
+        // return null;
+      // }
+    }));
+
+    // console.log("storyNodes");
+    // console.log(storyNodes);
 
     return (
       <div className="container">
@@ -98,8 +108,8 @@ var App = React.createClass({
       var url = "https://www.reddit.com/" + location + ".json?after=" + last_name;
     }
 
-    console.log("url");
-    console.log(url);
+    // console.log("url");
+    // console.log(url);
 
     $.ajax({
       url: url,
