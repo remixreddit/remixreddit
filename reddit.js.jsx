@@ -6,25 +6,6 @@ var browserHistory = History.createHistory();
 var Story = React.createClass({
   render: function() {
 
-    // console.log(this.props.story.preview.images[0].source.url);
-    // console.log(this.props.story.preview.images[0]);
-
-    try {
-      var imageTag = (
-        <img src={this.props.story.preview.images[0].source.url} width="500" />
-      )
-    }
-    catch (e) {
-      var imageTag = ""
-    }
-
-    var _this = this;
-    var t = function() {
-      return {
-        __html: $('<div />').html(_this.props.story.media_embed.content).text()
-      };
-    }
-
     return (
       <div className="row" key={this.props.story.name}>
         <div className="col-xs-1">
@@ -37,9 +18,6 @@ var Story = React.createClass({
           <br/>
           {this.props.story.author}
           <div dangerouslySetInnerHTML={t()} />
-          <div>
-            { imageTag }
-          </div>
         </div>
       </div>
     );
@@ -48,24 +26,18 @@ var Story = React.createClass({
 
 var StoryList = React.createClass({
   render: function() {
-    // console.log("this.props.stories");
-    // console.log(this.props.stories);
 
     var indexNumber = 0;
     var storyNodes = _.compact(_.map(this.props.stories, function(story) {
       indexNumber += 1;
 
       try {
-        // var imageInfo = story.data.preview.images[0].source.url;
         return <Story key={story.data.id} story={story.data} indexNumber={indexNumber} />;
       }
       catch (e) {
         return null;
       }
     }));
-
-    // console.log("storyNodes");
-    // console.log(storyNodes);
 
     return (
       <div className="container">
