@@ -6,8 +6,6 @@ import ReactDOM from 'react-dom'
 
 import { Router, Route, Link, browserHistory } from 'react-router'
 
-// var browserHistory = History.createHistory();
-
 var Story = React.createClass({
   render: function() {
 
@@ -52,9 +50,7 @@ var StoryList = React.createClass({
 });
 
 window.onscroll = function(ev) {
-  // console.log("on scroll");
   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
-    // console.log("bottom");
     $('body').trigger('bottom');
   }
 };
@@ -71,22 +67,14 @@ var App = React.createClass({
   },
   loadMore: function(location) {
     var _this = this;
-    // console.log(location);
     var url = "https://www.reddit.com" + location + ".json";
 
     if (this.state.stories.length > 0) {
-      // console.log(this.state.stories);
       var storyLength = this.state.stories.length;
       var lastStory = this.state.stories[storyLength - 1];
-      // console.log("lastStory");
-      // console.log(lastStory);
-      // var last_name = this.state[0].data.name;
       var last_name = lastStory.data.name;
       var url = "https://www.reddit.com/" + location + ".json?after=" + last_name;
     }
-
-    // console.log("url");
-    // console.log(url);
 
     $.ajax({
       url: url,
@@ -95,11 +83,7 @@ var App = React.createClass({
           format: "json"
       },
       success: function( response ) {
-        // console.log("response");
-        // console.log(_this.state.stories);
-        // console.log(response);
         var stories = _this.state.stories.concat(response.data.children);
-        // console.log(stories);
         _this.setState({stories: stories});
       }
     });

@@ -73,8 +73,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// var browserHistory = History.createHistory();
-
 	var Story = _react2.default.createClass({
 	  displayName: 'Story',
 
@@ -128,9 +126,7 @@
 	});
 
 	window.onscroll = function (ev) {
-	  // console.log("on scroll");
 	  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
-	    // console.log("bottom");
 	    (0, _jquery2.default)('body').trigger('bottom');
 	  }
 	};
@@ -149,22 +145,14 @@
 	  },
 	  loadMore: function loadMore(location) {
 	    var _this = this;
-	    // console.log(location);
 	    var url = "https://www.reddit.com" + location + ".json";
 
 	    if (this.state.stories.length > 0) {
-	      // console.log(this.state.stories);
 	      var storyLength = this.state.stories.length;
 	      var lastStory = this.state.stories[storyLength - 1];
-	      // console.log("lastStory");
-	      // console.log(lastStory);
-	      // var last_name = this.state[0].data.name;
 	      var last_name = lastStory.data.name;
 	      var url = "https://www.reddit.com/" + location + ".json?after=" + last_name;
 	    }
-
-	    // console.log("url");
-	    // console.log(url);
 
 	    _jquery2.default.ajax({
 	      url: url,
@@ -173,11 +161,7 @@
 	        format: "json"
 	      },
 	      success: function success(response) {
-	        // console.log("response");
-	        // console.log(_this.state.stories);
-	        // console.log(response);
 	        var stories = _this.state.stories.concat(response.data.children);
-	        // console.log(stories);
 	        _this.setState({ stories: stories });
 	      }
 	    });
