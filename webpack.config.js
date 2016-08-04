@@ -1,12 +1,11 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname);
-var APP_DIR = path.resolve(__dirname);
+var APP_DIR = path.resolve(__dirname, 'src');
+var BUILD_DIR = path.resolve(__dirname, 'out');
 
 var config = {
   entry: [
-    // './History.min.js',
     APP_DIR + '/reddit.js.jsx',
   ],
   output: {
