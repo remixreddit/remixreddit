@@ -156,6 +156,22 @@
 	  }
 	};
 
+	var loadLocation = function loadLocation(location, callback) {
+	  console.log("loadLocation");
+	  console.log(location);
+
+	  _jquery2.default.ajax({
+	    url: location,
+	    dataType: "json",
+	    data: {
+	      format: "json"
+	    },
+	    success: function success(response) {
+	      callback(response.data.children);
+	    }
+	  });
+	};
+
 	var Subreddit = _react2.default.createClass({
 	  displayName: 'Subreddit',
 
@@ -173,48 +189,29 @@
 	    this.newStories(this.props.location);
 	  },
 	  newStories: function newStories(location) {
+	    console.log("newStories");
 	    var _this = this;
-	    var url = "https://www.reddit.com/" + location + ".json";
+	    var url = "https://www.reddit.com" + location + ".json";
 
-	    if (this.state.stories.length > 0) {
-	      var storyLength = this.state.stories.length;
-	      var lastStory = this.state.stories[storyLength - 1];
-	      var last_name = lastStory.data.name;
-	      var url = "https://www.reddit.com/" + location + ".json?after=" + last_name;
-	    }
-
-	    _jquery2.default.ajax({
-	      url: url,
-	      dataType: "json",
-	      data: {
-	        format: "json"
-	      },
-	      success: function success(response) {
-	        _this.setState({ stories: response.data.children });
-	      }
+	    loadLocation(url, function (stories) {
+	      _this.setState({ stories: stories });
 	    });
 	  },
 	  loadMore: function loadMore(location) {
+	    console.log("loadMore");
 	    var _this = this;
-	    var url = "https://www.reddit.com/" + location + ".json";
+	    var url = "https://www.reddit.com" + location + ".json";
 
 	    if (this.state.stories.length > 0) {
 	      var storyLength = this.state.stories.length;
 	      var lastStory = this.state.stories[storyLength - 1];
 	      var last_name = lastStory.data.name;
-	      var url = "https://www.reddit.com/" + location + ".json?after=" + last_name;
+	      var url = "https://www.reddit.com" + location + ".json?after=" + last_name;
 	    }
 
-	    _jquery2.default.ajax({
-	      url: url,
-	      dataType: "json",
-	      data: {
-	        format: "json"
-	      },
-	      success: function success(response) {
-	        var stories = _this.state.stories.concat(response.data.children);
-	        _this.setState({ stories: stories });
-	      }
+	    loadLocation(url, function (stories) {
+	      var stories = _this.state.stories.concat(stories);
+	      _this.setState({ stories: stories });
 	    });
 	  },
 	  componentDidMount: function componentDidMount() {
@@ -225,8 +222,7 @@
 	    }, 3000);
 	    (0, _jquery2.default)('body').on("bottom", throttledMore);
 
-	    window.loadMore = this.loadMore;
-	    this.loadMore(this.props.location);
+	    // window.loadMore = this.loadMore;
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(StoryList, { stories: this.state.stories });

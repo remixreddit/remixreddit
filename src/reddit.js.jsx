@@ -66,6 +66,22 @@ window.onscroll = function(ev) {
   }
 };
 
+var loadLocation = function(location, callback) {
+  console.log("loadLocation");
+  console.log(location);
+
+  $.ajax({
+    url: location,
+    dataType: "json",
+    data: {
+        format: "json"
+    },
+    success: function( response ) {
+      callback(response.data.children);
+    }
+  });
+};
+
 var Subreddit = React.createClass({
   getDefaultProps: function() {
     return {
@@ -81,48 +97,29 @@ var Subreddit = React.createClass({
     this.newStories(this.props.location);
   },
   newStories: function(location) {
+    console.log("newStories")
     var _this = this;
-    var url = "https://www.reddit.com/" + location + ".json";
+    var url = "https://www.reddit.com" + location + ".json";
 
-    if (this.state.stories.length > 0) {
-      var storyLength = this.state.stories.length;
-      var lastStory = this.state.stories[storyLength - 1];
-      var last_name = lastStory.data.name;
-      var url = "https://www.reddit.com/" + location + ".json?after=" + last_name;
-    }
-
-    $.ajax({
-      url: url,
-      dataType: "json",
-      data: {
-          format: "json"
-      },
-      success: function( response ) {
-        _this.setState({stories: response.data.children});
-      }
+    loadLocation(url, function(stories) {
+      _this.setState({stories: stories});
     });
   },
   loadMore: function(location) {
+    console.log("loadMore")
     var _this = this;
-    var url = "https://www.reddit.com/" + location + ".json";
+    var url = "https://www.reddit.com" + location + ".json";
 
     if (this.state.stories.length > 0) {
       var storyLength = this.state.stories.length;
       var lastStory = this.state.stories[storyLength - 1];
       var last_name = lastStory.data.name;
-      var url = "https://www.reddit.com/" + location + ".json?after=" + last_name;
+      var url = "https://www.reddit.com" + location + ".json?after=" + last_name;
     }
 
-    $.ajax({
-      url: url,
-      dataType: "json",
-      data: {
-          format: "json"
-      },
-      success: function( response ) {
-        var stories = _this.state.stories.concat(response.data.children);
-        _this.setState({stories: stories});
-      }
+    loadLocation(url, function(stories) {
+      var stories = _this.state.stories.concat(stories);
+      _this.setState({ stories: stories });
     });
   },
   componentDidMount: function() {
@@ -133,8 +130,7 @@ var Subreddit = React.createClass({
     }, 3000);
     $('body').on("bottom", throttledMore);
 
-    window.loadMore = this.loadMore;
-    this.loadMore(this.props.location);
+    // window.loadMore = this.loadMore;
   },
   render: function() {
     return (
