@@ -1,2 +1,2 @@
-server: python -m SimpleHTTPServer 8000
+server: revore-server
 compile: webpack --progress --colors --watch

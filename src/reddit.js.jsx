@@ -49,6 +49,21 @@ var StoryList = React.createClass({
   },
 });
 
+var SubLinks = React.createClass({
+  render: function() {
+    return (
+      <div>
+        <h1>
+          hello
+        </h1>
+        <div>
+          <Link to="/r/aww">Awwww</Link>
+        </div>
+      </div>
+    );
+  },
+});
+
 window.onscroll = function(ev) {
   if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
     $('body').trigger('bottom');
@@ -101,7 +116,10 @@ var App = React.createClass({
   },
   render: function() {
     return (
-      <StoryList stories={this.state.stories} />
+      <div>
+        <SubLinks />
+        <StoryList stories={this.state.stories} />
+      </div>
     );
   },
 });

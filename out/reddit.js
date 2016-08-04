@@ -125,6 +125,31 @@
 	  }
 	});
 
+	var SubLinks = _react2.default.createClass({
+	  displayName: 'SubLinks',
+
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        'hello'
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/r/aww' },
+	          'Awwww'
+	        )
+	      )
+	    );
+	  }
+	});
+
 	window.onscroll = function (ev) {
 	  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
 	    (0, _jquery2.default)('body').trigger('bottom');
@@ -178,7 +203,12 @@
 	    this.loadMore(this.state.url);
 	  },
 	  render: function render() {
-	    return _react2.default.createElement(StoryList, { stories: this.state.stories });
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(SubLinks, null),
+	      _react2.default.createElement(StoryList, { stories: this.state.stories })
+	    );
 	  }
 	});
 
