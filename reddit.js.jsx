@@ -17,7 +17,6 @@ var Story = React.createClass({
           </a>
           <br/>
           {this.props.story.author}
-          <div dangerouslySetInnerHTML={t()} />
         </div>
       </div>
     );
@@ -95,7 +94,7 @@ var App = React.createClass({
         // console.log(_this.state.stories);
         // console.log(response);
         var stories = _this.state.stories.concat(response.data.children);
-        console.log(stories);
+        // console.log(stories);
         _this.setState({stories: stories});
       }
     });
