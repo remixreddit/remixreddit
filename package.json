@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --progress --colors --watch"
   },
   "dependencies": {
     "babel-loader": "^6.2.4",

@@ -5,10 +5,18 @@ var BUILD_DIR = path.resolve(__dirname);
 var APP_DIR = path.resolve(__dirname);
 
 var config = {
-  entry: APP_DIR + '/reddit.js.jsx',
+  entry: [
+    './react.js',
+    './react-dom.js',
+    './jquery.js',
+    './underscore-min.js',
+    './ReactRouter.js',
+    './History.min.js',
+    APP_DIR + '/reddit.js.jsx',
+  ],
   output: {
     path: BUILD_DIR,
-    filename: 'reddit.js'
+    filename: 'reddit-done.js'
   },
   module : {
     loaders : [
