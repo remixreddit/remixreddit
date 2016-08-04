@@ -8,7 +8,6 @@ import { Router, Route, Link, browserHistory } from 'react-router'
 
 var Story = React.createClass({
   render: function() {
-
     return (
       <div className="row" key={this.props.story.name}>
         <div className="col-xs-1">
@@ -28,13 +27,9 @@ var Story = React.createClass({
 
 var StoryList = React.createClass({
   render: function() {
-
-    var indexNumber = 0;
     var storyNodes = _.compact(_.map(this.props.stories, function(story) {
-      indexNumber += 1;
-
       try {
-        return <Story key={story.data.id} story={story.data} indexNumber={indexNumber} />;
+        return <Story key={story.data.id} story={story.data} />;
       }
       catch (e) {
         return null;
@@ -71,19 +66,45 @@ window.onscroll = function(ev) {
   }
 };
 
-var App = React.createClass({
+var Subreddit = React.createClass({
+  getDefaultProps: function() {
+    return {
+      location: window.location.pathname || ""
+    };
+  },
   getInitialState: function() {
-
-    var location = window.location.pathname;
-
     return ({
-      url: location,
       stories: [],
+    });
+  },
+  componentWillReceiveProps: function(nextProps) {
+    this.newStories(this.props.location);
+  },
+  newStories: function(location) {
+    var _this = this;
+    var url = "https://www.reddit.com/" + location + ".json";
+
+    if (this.state.stories.length > 0) {
+      var storyLength = this.state.stories.length;
+      var lastStory = this.state.stories[storyLength - 1];
+      var last_name = lastStory.data.name;
+      var url = "https://www.reddit.com/" + location + ".json?after=" + last_name;
+    }
+
+    $.ajax({
+      url: url,
+      dataType: "json",
+      data: {
+          format: "json"
+      },
+      success: function( response ) {
+        _this.setState({stories: response.data.children});
+      }
     });
   },
   loadMore: function(location) {
     var _this = this;
-    var url = "https://www.reddit.com" + location + ".json";
+    var url = "https://www.reddit.com/" + location + ".json";
 
     if (this.state.stories.length > 0) {
       var storyLength = this.state.stories.length;
@@ -105,27 +126,32 @@ var App = React.createClass({
     });
   },
   componentDidMount: function() {
-
-
-
     var _this = this;
 
     var throttledMore = _.throttle(function() {
-      _this.loadMore(_this.state.url)
+      _this.loadMore(_this.props.location)
     }, 3000);
     $('body').on("bottom", throttledMore);
 
     window.loadMore = this.loadMore;
-    this.loadMore(this.state.url);
+    this.loadMore(this.props.location);
   },
+  render: function() {
+    return (
+      <StoryList stories={this.state.stories} />
+    );
+  },
+})
+
+var App = React.createClass({
   render: function() {
     return (
       <div>
         <SubLinks />
-        <StoryList stories={this.state.stories} />
+        <Subreddit location={window.location.pathname} />
       </div>
     );
-  },
+  }
 });
 
 var routeSet = (

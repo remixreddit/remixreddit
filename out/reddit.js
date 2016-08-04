@@ -77,7 +77,6 @@
 	  displayName: 'Story',
 
 	  render: function render() {
-
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'row', key: this.props.story.name },
@@ -105,13 +104,9 @@
 	  displayName: 'StoryList',
 
 	  render: function render() {
-
-	    var indexNumber = 0;
 	    var storyNodes = _underscore2.default.compact(_underscore2.default.map(this.props.stories, function (story) {
-	      indexNumber += 1;
-
 	      try {
-	        return _react2.default.createElement(Story, { key: story.data.id, story: story.data, indexNumber: indexNumber });
+	        return _react2.default.createElement(Story, { key: story.data.id, story: story.data });
 	      } catch (e) {
 	        return null;
 	      }
@@ -161,21 +156,47 @@
 	  }
 	};
 
-	var App = _react2.default.createClass({
-	  displayName: 'App',
+	var Subreddit = _react2.default.createClass({
+	  displayName: 'Subreddit',
 
-	  getInitialState: function getInitialState() {
-
-	    var location = window.location.pathname;
-
+	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      url: location,
+	      location: window.location.pathname || ""
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
 	      stories: []
 	    };
 	  },
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    this.newStories(this.props.location);
+	  },
+	  newStories: function newStories(location) {
+	    var _this = this;
+	    var url = "https://www.reddit.com/" + location + ".json";
+
+	    if (this.state.stories.length > 0) {
+	      var storyLength = this.state.stories.length;
+	      var lastStory = this.state.stories[storyLength - 1];
+	      var last_name = lastStory.data.name;
+	      var url = "https://www.reddit.com/" + location + ".json?after=" + last_name;
+	    }
+
+	    _jquery2.default.ajax({
+	      url: url,
+	      dataType: "json",
+	      data: {
+	        format: "json"
+	      },
+	      success: function success(response) {
+	        _this.setState({ stories: response.data.children });
+	      }
+	    });
+	  },
 	  loadMore: function loadMore(location) {
 	    var _this = this;
-	    var url = "https://www.reddit.com" + location + ".json";
+	    var url = "https://www.reddit.com/" + location + ".json";
 
 	    if (this.state.stories.length > 0) {
 	      var storyLength = this.state.stories.length;
@@ -197,23 +218,30 @@
 	    });
 	  },
 	  componentDidMount: function componentDidMount() {
-
 	    var _this = this;
 
 	    var throttledMore = _underscore2.default.throttle(function () {
-	      _this.loadMore(_this.state.url);
+	      _this.loadMore(_this.props.location);
 	    }, 3000);
 	    (0, _jquery2.default)('body').on("bottom", throttledMore);
 
 	    window.loadMore = this.loadMore;
-	    this.loadMore(this.state.url);
+	    this.loadMore(this.props.location);
 	  },
+	  render: function render() {
+	    return _react2.default.createElement(StoryList, { stories: this.state.stories });
+	  }
+	});
+
+	var App = _react2.default.createClass({
+	  displayName: 'App',
+
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement(SubLinks, null),
-	      _react2.default.createElement(StoryList, { stories: this.state.stories })
+	      _react2.default.createElement(Subreddit, { location: window.location.pathname })
 	    );
 	  }
 	});
