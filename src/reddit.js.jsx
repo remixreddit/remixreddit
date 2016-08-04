@@ -129,8 +129,6 @@ var Subreddit = React.createClass({
       _this.loadMore(_this.props.location)
     }, 3000);
     $('body').on("bottom", throttledMore);
-
-    // window.loadMore = this.loadMore;
   },
   render: function() {
     return (

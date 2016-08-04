@@ -221,8 +221,6 @@
 	      _this.loadMore(_this.props.location);
 	    }, 3000);
 	    (0, _jquery2.default)('body').on("bottom", throttledMore);
-
-	    // window.loadMore = this.loadMore;
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(StoryList, { stories: this.state.stories });
