@@ -1,7 +1,12 @@
-var Router = ReactRouter.Router;
-var Link = ReactRouter.Link;
-var Route = ReactRouter.Route;
-var browserHistory = History.createHistory();
+import $ from 'jquery'
+import _ from 'underscore'
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+import { Router, Route, Link } from 'react-router'
+
+// var browserHistory = History.createHistory();
 
 var Story = React.createClass({
   render: function() {
@@ -118,7 +123,7 @@ var App = React.createClass({
 });
 
 var routeSet = (
-  <Router history={browserHistory}>
+  <Router>
     <Route path="/" component={App}>
       <Route path="/r/:subreddit" component={App} />
     </Route>
@@ -126,4 +131,4 @@ var routeSet = (
 )
 
 ReactDOM.render(routeSet, document.getElementById('app'))
-browserHistory.push(window.location.pathname);
+// browserHistory.push(window.location.pathname);
