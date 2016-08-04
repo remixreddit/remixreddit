@@ -57,6 +57,7 @@ var SubLinks = React.createClass({
           hello
         </h1>
         <div>
+          <Link to="/">Frontpage</Link>
           <Link to="/r/aww">Awwww</Link>
         </div>
       </div>
