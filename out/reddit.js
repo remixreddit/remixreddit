@@ -157,10 +157,7 @@
 	};
 
 	var loadLocation = function loadLocation(location, callback) {
-	  console.log("loadLocation");
-	  console.log(location);
-
-	  _jquery2.default.ajax({
+	  return _jquery2.default.ajax({
 	    url: location,
 	    dataType: "json",
 	    data: {
@@ -175,30 +172,27 @@
 	var Subreddit = _react2.default.createClass({
 	  displayName: 'Subreddit',
 
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      location: window.location.pathname || ""
-	    };
-	  },
 	  getInitialState: function getInitialState() {
 	    return {
+	      location: this.props.location,
 	      stories: []
 	    };
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    this.newStories(this.props.location);
+	    this.setState({
+	      location: nextProps.location,
+	      stories: []
+	    });
+	    this.newStories(nextProps.location);
 	  },
 	  newStories: function newStories(location) {
-	    console.log("newStories");
 	    var _this = this;
 	    var url = "https://www.reddit.com" + location + ".json";
-
 	    loadLocation(url, function (stories) {
 	      _this.setState({ stories: stories });
 	    });
 	  },
 	  loadMore: function loadMore(location) {
-	    console.log("loadMore");
 	    var _this = this;
 	    var url = "https://www.reddit.com" + location + ".json";
 
@@ -216,11 +210,11 @@
 	  },
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
-
 	    var throttledMore = _underscore2.default.throttle(function () {
 	      _this.loadMore(_this.props.location);
 	    }, 3000);
 	    (0, _jquery2.default)('body').on("bottom", throttledMore);
+	    this.newStories(this.state.location);
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(StoryList, { stories: this.state.stories });

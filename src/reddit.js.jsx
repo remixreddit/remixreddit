@@ -67,10 +67,7 @@ window.onscroll = function(ev) {
 };
 
 var loadLocation = function(location, callback) {
-  console.log("loadLocation");
-  console.log(location);
-
-  $.ajax({
+  return $.ajax({
     url: location,
     dataType: "json",
     data: {
@@ -83,30 +80,27 @@ var loadLocation = function(location, callback) {
 };
 
 var Subreddit = React.createClass({
-  getDefaultProps: function() {
-    return {
-      location: window.location.pathname || ""
-    };
-  },
   getInitialState: function() {
     return ({
+      location: this.props.location,
       stories: [],
     });
   },
   componentWillReceiveProps: function(nextProps) {
-    this.newStories(this.props.location);
+    this.setState({
+      location: nextProps.location,
+      stories: [],
+    })
+    this.newStories(nextProps.location);
   },
   newStories: function(location) {
-    console.log("newStories")
     var _this = this;
     var url = "https://www.reddit.com" + location + ".json";
-
     loadLocation(url, function(stories) {
       _this.setState({stories: stories});
     });
   },
   loadMore: function(location) {
-    console.log("loadMore")
     var _this = this;
     var url = "https://www.reddit.com" + location + ".json";
 
@@ -124,11 +118,11 @@ var Subreddit = React.createClass({
   },
   componentDidMount: function() {
     var _this = this;
-
     var throttledMore = _.throttle(function() {
       _this.loadMore(_this.props.location)
     }, 3000);
     $('body').on("bottom", throttledMore);
+    this.newStories(this.state.location);
   },
   render: function() {
     return (
