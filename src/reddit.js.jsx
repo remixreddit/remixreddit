@@ -119,7 +119,7 @@ var Subreddit = React.createClass({
   componentDidMount: function() {
     var _this = this;
     var throttledMore = _.throttle(function() {
-      _this.loadMore(_this.props.location)
+      _this.loadMore(_this.state.location)
     }, 3000);
     $('body').on("bottom", throttledMore);
     this.newStories(this.state.location);

@@ -211,7 +211,7 @@
 	  componentDidMount: function componentDidMount() {
 	    var _this = this;
 	    var throttledMore = _underscore2.default.throttle(function () {
-	      _this.loadMore(_this.props.location);
+	      _this.loadMore(_this.state.location);
 	    }, 3000);
 	    (0, _jquery2.default)('body').on("bottom", throttledMore);
 	    this.newStories(this.state.location);
