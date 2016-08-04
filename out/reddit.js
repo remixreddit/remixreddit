@@ -197,6 +197,7 @@
 	    });
 	  },
 	  componentDidMount: function componentDidMount() {
+
 	    var _this = this;
 
 	    var throttledMore = _underscore2.default.throttle(function () {

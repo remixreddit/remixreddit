@@ -105,6 +105,9 @@ var App = React.createClass({
     });
   },
   componentDidMount: function() {
+
+
+
     var _this = this;
 
     var throttledMore = _.throttle(function() {
