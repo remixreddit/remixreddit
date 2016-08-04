@@ -200,7 +200,7 @@
 
 	var routeSet = _react2.default.createElement(
 	  _reactRouter.Router,
-	  null,
+	  { history: _reactRouter.browserHistory },
 	  _react2.default.createElement(
 	    _reactRouter.Route,
 	    { path: '/', component: App },
@@ -209,7 +209,7 @@
 	);
 
 	_reactDom2.default.render(routeSet, document.getElementById('app'));
-	// browserHistory.push(window.location.pathname);
+	_reactRouter.browserHistory.push(window.location.pathname);
 
 /***/ },
 /* 2 */
