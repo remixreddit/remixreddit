@@ -47,14 +47,13 @@ var StoryPreview = React.createClass({
 
         if (parser.hostname == "i.imgur.com") {
           var previewUrl = _this.props.story.url.replace("gifv", "gif");
-          var previewWidth = _this.props.story.preview.images[0].source.width;
-          var preview = (<img src={previewUrl} className="preview-image" />);
         }
         else {
           var previewUrl = _this.props.story.preview.images[0].source.url;
-          var previewWidth = _this.props.story.preview.images[0].source.width;
-          var preview = (<img src={previewUrl} className="preview-image" width={previewWidth} />);
         }
+
+        var previewWidth = _this.props.story.preview.images[0].source.width;
+        var preview = (<img src={previewUrl} className="preview-image" />);
       }
     }
     catch (e) {
