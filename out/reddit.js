@@ -108,7 +108,11 @@
 
 	    try {
 	      if (_this.props.story.secure_media_embed.content != null) {
-	        var preview = _react2.default.createElement('div', { dangerouslySetInnerHTML: getEmbed() });
+	        var preview = _react2.default.createElement(
+	          'a',
+	          { href: this.props.story.url, target: '_new' },
+	          _react2.default.createElement('div', { dangerouslySetInnerHTML: getEmbed() })
+	        );
 	      } else {
 	        var parser = document.createElement('a');
 	        parser.href = _this.props.story.url;
@@ -120,7 +124,11 @@
 	        }
 
 	        var previewWidth = _this.props.story.preview.images[0].source.width;
-	        var preview = _react2.default.createElement('img', { src: previewUrl, className: 'preview-image' });
+	        var preview = _react2.default.createElement(
+	          'a',
+	          { href: this.props.story.url, target: '_new' },
+	          _react2.default.createElement('img', { src: previewUrl, className: 'preview-image' })
+	        );
 	      }
 	    } catch (e) {}
 

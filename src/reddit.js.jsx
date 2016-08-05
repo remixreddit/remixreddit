@@ -39,7 +39,11 @@ var StoryPreview = React.createClass({
 
     try {
       if (_this.props.story.secure_media_embed.content != null) {
-        var preview = (<div dangerouslySetInnerHTML={getEmbed()} />);
+        var preview = (
+          <a href={this.props.story.url} target="_new">
+            <div dangerouslySetInnerHTML={getEmbed()} />
+          </a>
+        );
       }
       else {
         var parser = document.createElement('a');
@@ -53,7 +57,11 @@ var StoryPreview = React.createClass({
         }
 
         var previewWidth = _this.props.story.preview.images[0].source.width;
-        var preview = (<img src={previewUrl} className="preview-image" />);
+        var preview = (
+          <a href={this.props.story.url} target="_new">
+            <img src={previewUrl} className="preview-image" />
+          </a>
+        );
       }
     }
     catch (e) {
