@@ -73,6 +73,68 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var decodeEntities = function () {
+	  // this prevents any overhead from creating the object each time
+	  var element = document.createElement('div');
+
+	  function decodeHTMLEntities(str) {
+	    if (str && typeof str === 'string') {
+	      // strip script/html tags
+	      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+	      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+	      element.innerHTML = str;
+	      str = element.textContent;
+	      element.textContent = '';
+	    }
+
+	    return str;
+	  }
+
+	  return decodeHTMLEntities;
+	}();
+
+	var StoryPreview = _react2.default.createClass({
+	  displayName: 'StoryPreview',
+
+	  render: function render() {
+	    var _this = this;
+
+	    function getEmbed() {
+	      var previewHtml = decodeEntities(_this.props.story.secure_media_embed.content);
+	      return { __html: previewHtml };
+	    }
+
+	    var preview = null;
+
+	    try {
+	      // console.log(_this.props.story.secure_media_embed.content == null);
+	      if (_this.props.story.secure_media_embed.content != null) {
+	        var preview = _react2.default.createElement('div', { dangerouslySetInnerHTML: getEmbed() });
+	      }
+	      // image previews
+	      else {
+	          // console.log(_this.props.story);
+
+	          var parser = document.createElement('a');
+	          parser.href = _this.props.story.url;
+
+	          // parser.protocol; // => "http:"
+	          // parser.hostname; // => "example.com"
+
+	          if (parser.hostname == "i.imgur.com") {
+	            var previewUrl = _this.props.story.url.replace("gifv", "gif");
+	            var preview = _react2.default.createElement('img', { src: previewUrl, className: 'preview-image' });
+	          } else {
+	            var previewUrl = _this.props.story.preview.images[0].source.url;
+	            var preview = _react2.default.createElement('img', { src: previewUrl, className: 'preview-image' });
+	          }
+	        }
+	    } catch (e) {}
+
+	    return preview;
+	  }
+	});
+
 	var Story = _react2.default.createClass({
 	  displayName: 'Story',
 
@@ -93,8 +155,10 @@
 	          { href: this.props.story.url },
 	          this.props.story.title
 	        ),
+	        ' ',
+	        this.props.story.author,
 	        _react2.default.createElement('br', null),
-	        this.props.story.author
+	        _react2.default.createElement(StoryPreview, { story: this.props.story })
 	      )
 	    );
 	  }
