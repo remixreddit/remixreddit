@@ -107,28 +107,22 @@
 	    var preview = null;
 
 	    try {
-	      // console.log(_this.props.story.secure_media_embed.content == null);
 	      if (_this.props.story.secure_media_embed.content != null) {
 	        var preview = _react2.default.createElement('div', { dangerouslySetInnerHTML: getEmbed() });
-	      }
-	      // image previews
-	      else {
-	          // console.log(_this.props.story);
+	      } else {
+	        var parser = document.createElement('a');
+	        parser.href = _this.props.story.url;
 
-	          var parser = document.createElement('a');
-	          parser.href = _this.props.story.url;
-
-	          // parser.protocol; // => "http:"
-	          // parser.hostname; // => "example.com"
-
-	          if (parser.hostname == "i.imgur.com") {
-	            var previewUrl = _this.props.story.url.replace("gifv", "gif");
-	            var preview = _react2.default.createElement('img', { src: previewUrl, className: 'preview-image' });
-	          } else {
-	            var previewUrl = _this.props.story.preview.images[0].source.url;
-	            var preview = _react2.default.createElement('img', { src: previewUrl, className: 'preview-image' });
-	          }
+	        if (parser.hostname == "i.imgur.com") {
+	          var previewUrl = _this.props.story.url.replace("gifv", "gif");
+	          var previewWidth = _this.props.story.preview.images[0].source.width;
+	          var preview = _react2.default.createElement('img', { src: previewUrl, className: 'preview-image' });
+	        } else {
+	          var previewUrl = _this.props.story.preview.images[0].source.url;
+	          var previewWidth = _this.props.story.preview.images[0].source.width;
+	          var preview = _react2.default.createElement('img', { src: previewUrl, className: 'preview-image', width: previewWidth });
 	        }
+	      }
 	    } catch (e) {}
 
 	    return preview;

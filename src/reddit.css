@@ -3,5 +3,5 @@
 }
 
 .preview-image {
-  width: 50%;
+  max-width: 50%;
 }

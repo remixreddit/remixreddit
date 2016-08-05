@@ -38,27 +38,22 @@ var StoryPreview = React.createClass({
     var preview = null;
 
     try {
-      // console.log(_this.props.story.secure_media_embed.content == null);
       if (_this.props.story.secure_media_embed.content != null) {
         var preview = (<div dangerouslySetInnerHTML={getEmbed()} />);
       }
-      // image previews
       else {
-        // console.log(_this.props.story);
-
         var parser = document.createElement('a');
         parser.href = _this.props.story.url;
 
-        // parser.protocol; // => "http:"
-        // parser.hostname; // => "example.com"
-
         if (parser.hostname == "i.imgur.com") {
           var previewUrl = _this.props.story.url.replace("gifv", "gif");
+          var previewWidth = _this.props.story.preview.images[0].source.width;
           var preview = (<img src={previewUrl} className="preview-image" />);
         }
         else {
           var previewUrl = _this.props.story.preview.images[0].source.url;
-          var preview = (<img src={previewUrl} className="preview-image" />);
+          var previewWidth = _this.props.story.preview.images[0].source.width;
+          var preview = (<img src={previewUrl} className="preview-image" width={previewWidth} />);
         }
       }
     }
