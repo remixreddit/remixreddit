@@ -126,7 +126,7 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'sublinks' },
 	      _react2.default.createElement(
 	        'h1',
 	        null,
@@ -140,6 +140,7 @@
 	          { to: '/' },
 	          'Frontpage'
 	        ),
+	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/r/aww' },
@@ -151,7 +152,9 @@
 	});
 
 	window.onscroll = function (ev) {
-	  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+	  var bottom500 = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
+
+	  if (bottom500) {
 	    (0, _jquery2.default)('body').trigger('bottom');
 	  }
 	};
@@ -227,9 +230,21 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
-	      _react2.default.createElement(SubLinks, null),
-	      _react2.default.createElement(Subreddit, { location: window.location.pathname })
+	      { className: 'container-fluid' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-1' },
+	          _react2.default.createElement(SubLinks, null)
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-11' },
+	          _react2.default.createElement(Subreddit, { location: window.location.pathname })
+	        )
+	      )
 	    );
 	  }
 	});

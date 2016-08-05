@@ -47,12 +47,12 @@ var StoryList = React.createClass({
 var SubLinks = React.createClass({
   render: function() {
     return (
-      <div>
+      <div className="sublinks">
         <h1>
           hello
         </h1>
         <div>
-          <Link to="/">Frontpage</Link>
+          <Link to="/">Frontpage</Link><br />
           <Link to="/r/aww">Awwww</Link>
         </div>
       </div>
@@ -61,7 +61,9 @@ var SubLinks = React.createClass({
 });
 
 window.onscroll = function(ev) {
-  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+  var bottom500 = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 200);
+
+  if (bottom500) {
     $('body').trigger('bottom');
   }
 };
@@ -134,9 +136,15 @@ var Subreddit = React.createClass({
 var App = React.createClass({
   render: function() {
     return (
-      <div>
-        <SubLinks />
-        <Subreddit location={window.location.pathname} />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-xs-1">
+            <SubLinks />
+          </div>
+          <div className="col-xs-11">
+            <Subreddit location={window.location.pathname} />
+          </div>
+        </div>
       </div>
     );
   }
