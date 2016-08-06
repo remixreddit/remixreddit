@@ -1,2 +1,2 @@
-server: python -m SimpleHTTPServer 8000
-compile:  babel --presets es2015,react --watch reddit.js.jsx --out-file reddit-react.js
+server: webpack-dev-server --inline --content-base . --history-api-fallback --port 8000
+compile: webpack --progress --colors --watch
