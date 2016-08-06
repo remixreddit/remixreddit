@@ -54,7 +54,7 @@ html, body {
 }
 
 .story-link, .story-link:active, .story-link:visited, .story-link:hover {
-  color: blue;
+  /*color: blue;*/
 }
 
 .story-author {
