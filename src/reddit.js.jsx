@@ -80,10 +80,12 @@ var Story = React.createClass({
   render: function() {
     return (
       <div className="row story" key={this.props.story.name}>
-        <div className="col-xs-1">
-          {this.props.story.score}
+        <div className="col-xs-2">
+          <div className="story-score">
+            {this.props.story.score}
+          </div>
         </div>
-        <div className="col-xs-11">
+        <div className="col-xs-10">
           <a href={this.props.story.url} class="story-link">
             {this.props.story.title}
           </a>
@@ -109,10 +111,8 @@ var StoryList = React.createClass({
     }));
 
     return (
-      <div className="story-list">
-        <div className="col-xs-10">
-          {storyNodes}
-        </div>
+      <div className="col-xs-10 story-list">
+        {storyNodes}
       </div>
     );
   },

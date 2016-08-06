@@ -37,14 +37,24 @@ html, body {
 }
 
 .story-list {
-  color: white;
+  background-color: white;
+  color: black;
 }
 
 .story-link, .story-link:active, .story-link:visited, .story-link:hover {
-  color: white;
+  color: black;
 }
 
 .story {
+  padding: 10px;
+}
+
+.story-score {
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  background-color: white;
+  text-align: center;
+  font-size: 24px;
   padding: 10px;
 }
 

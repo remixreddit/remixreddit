@@ -149,12 +149,16 @@
 	      { className: 'row story', key: this.props.story.name },
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'col-xs-1' },
-	        this.props.story.score
+	        { className: 'col-xs-2' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'story-score' },
+	          this.props.story.score
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'col-xs-11' },
+	        { className: 'col-xs-10' },
 	        _react2.default.createElement(
 	          'a',
 	          { href: this.props.story.url, 'class': 'story-link' },
@@ -183,12 +187,8 @@
 
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'story-list' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-10' },
-	        storyNodes
-	      )
+	      { className: 'col-xs-10 story-list' },
+	      storyNodes
 	    );
 	  }
 	});
