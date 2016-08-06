@@ -149,21 +149,50 @@
 	      { className: 'row story', key: this.props.story.name },
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'col-xs-1' },
-	        this.props.story.score
+	        { className: 'col-xs-2' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'story-score' },
+	          this.props.story.score
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'col-xs-11' },
+	        { className: 'col-xs-10' },
 	        _react2.default.createElement(
-	          'a',
-	          { href: this.props.story.url },
-	          this.props.story.title
-	        ),
-	        ' ',
-	        this.props.story.author,
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(StoryPreview, { story: this.props.story })
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-xs-12 story-header' },
+	            _react2.default.createElement(
+	              'a',
+	              { href: this.props.story.url, className: 'story-link' },
+	              this.props.story.title
+	            ),
+	            ' ',
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'story-author' },
+	              this.props.story.author
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-xs-12 story-subheader' },
+	            _react2.default.createElement(
+	              'a',
+	              { href: this.props.story.permalink },
+	              this.props.story.num_comments,
+	              ' comments'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-xs-12' },
+	            _react2.default.createElement(StoryPreview, { story: this.props.story })
+	          )
+	        )
 	      )
 	    );
 	  }
@@ -183,12 +212,8 @@
 
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'row' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-12' },
-	        storyNodes
-	      )
+	      { className: 'col-xs-10 story-list' },
+	      storyNodes
 	    );
 	  }
 	});
@@ -199,36 +224,58 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'row sublinks' },
+	      { className: 'col-xs-2 sublinks' },
 	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-12' },
+	        'h1',
+	        { className: 'title' },
+	        'Reddit'
+	      ),
+	      _react2.default.createElement(
+	        'ul',
+	        { className: 'list-unstyled' },
 	        _react2.default.createElement(
-	          'h1',
-	          { className: 'title' },
-	          'Reddit'
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/', className: 'btn' },
+	            'Frontpage'
+	          )
 	        ),
 	        _react2.default.createElement(
-	          'ul',
-	          { className: 'list-unstyled' },
+	          'li',
+	          null,
 	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/' },
-	              'Frontpage'
-	            ),
-	            _react2.default.createElement('br', null)
-	          ),
+	            _reactRouter.Link,
+	            { to: '/r/aww', className: 'btn' },
+	            'Aww'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
 	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/r/aww' },
-	              'Awwww'
-	            )
+	            _reactRouter.Link,
+	            { to: '/r/funny', className: 'btn' },
+	            'Funny'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/r/pics', className: 'btn' },
+	            'Pics'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/r/videos', className: 'btn' },
+	            'Videos'
 	          )
 	        )
 	      )
@@ -316,8 +363,12 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'container-fluid' },
-	      _react2.default.createElement(SubLinks, null),
-	      _react2.default.createElement(Subreddit, { location: window.location.pathname })
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(SubLinks, null),
+	        _react2.default.createElement(Subreddit, { location: window.location.pathname })
+	      )
 	    );
 	  }
 	});

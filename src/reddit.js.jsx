@@ -80,17 +80,31 @@ var Story = React.createClass({
   render: function() {
     return (
       <div className="row story" key={this.props.story.name}>
-        <div className="col-xs-1">
-          {this.props.story.score}
+        <div className="col-xs-2">
+          <div className="story-score">
+            {this.props.story.score}
+          </div>
         </div>
-        <div className="col-xs-11">
-          <a href={this.props.story.url}>
-            {this.props.story.title}
-          </a>
-          &nbsp;
-          {this.props.story.author}
-          <br/>
-          <StoryPreview story={this.props.story} />
+        <div className="col-xs-10">
+          <div className="row">
+            <div className="col-xs-12 story-header">
+              <a href={this.props.story.url} className="story-link">
+                {this.props.story.title}
+              </a>
+              &nbsp;
+              <span className="story-author">
+                {this.props.story.author}
+              </span>
+            </div>
+            <div className="col-xs-12 story-subheader">
+              <a href={this.props.story.permalink}>
+                {this.props.story.num_comments} comments
+              </a>
+            </div>
+            <div className="col-xs-12">
+              <StoryPreview story={this.props.story} />
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -109,10 +123,8 @@ var StoryList = React.createClass({
     }));
 
     return (
-      <div className="row">
-        <div className="col-xs-12">
-          {storyNodes}
-        </div>
+      <div className="col-xs-10 story-list">
+        {storyNodes}
       </div>
     );
   },
@@ -121,20 +133,27 @@ var StoryList = React.createClass({
 var SubLinks = React.createClass({
   render: function() {
     return (
-      <div className="row sublinks">
-        <div className="col-xs-12">
-          <h1 className="title">
-            Reddit
-          </h1>
-          <ul className="list-unstyled">
-            <li>
-              <Link to="/">Frontpage</Link><br />
-            </li>
-            <li>
-              <Link to="/r/aww">Awwww</Link>
-            </li>
-          </ul>
-        </div>
+      <div className="col-xs-2 sublinks">
+        <h1 className="title">
+          Reddit
+        </h1>
+        <ul className="list-unstyled">
+          <li>
+            <Link to="/" className="btn">Frontpage</Link>
+          </li>
+          <li>
+            <Link to="/r/aww" className="btn">Aww</Link>
+          </li>
+          <li>
+            <Link to="/r/funny" className="btn">Funny</Link>
+          </li>
+          <li>
+            <Link to="/r/pics" className="btn">Pics</Link>
+          </li>
+          <li>
+            <Link to="/r/videos" className="btn">Videos</Link>
+          </li>
+        </ul>
       </div>
     );
   },
@@ -217,8 +236,10 @@ var App = React.createClass({
   render: function() {
     return (
       <div className="container-fluid">
-        <SubLinks />
-        <Subreddit location={window.location.pathname} />
+        <div className="row">
+          <SubLinks />
+          <Subreddit location={window.location.pathname} />
+        </div>
       </div>
     );
   }
