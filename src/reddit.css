@@ -1,3 +1,30 @@
+html, body {
+  background-color: #333;
+}
+
+.container-fluid {
+}
+
+.sublinks {
+  color: white;
+  /*background-color: green;*/
+}
+
+.sublinks a, .sublinks a:active, .sublinks a:visited, .sublinks a:hover {
+  color: white;
+  border-bottom: 1px white;
+  background-color: #555;
+  /*margin-bottom: 10px;*/
+  border-radius: 0px;
+  width: 100%;
+  text-align: left;
+}
+
+.sublinks a:hover {
+  background-color: #ccc;
+  color: black;
+}
+
 .story {
   padding: 10px;
 }

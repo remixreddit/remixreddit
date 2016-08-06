@@ -183,10 +183,10 @@
 
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'row' },
+	      { className: 'story-list' },
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'col-xs-12' },
+	        { className: 'col-xs-10' },
 	        storyNodes
 	      )
 	    );
@@ -199,36 +199,31 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'row sublinks' },
+	      { className: 'col-xs-2 sublinks' },
 	      _react2.default.createElement(
-	        'div',
-	        { className: 'col-xs-12' },
+	        'h1',
+	        { className: 'title' },
+	        'Reddit'
+	      ),
+	      _react2.default.createElement(
+	        'ul',
+	        { className: 'list-unstyled' },
 	        _react2.default.createElement(
-	          'h1',
-	          { className: 'title' },
-	          'Reddit'
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/', className: 'btn' },
+	            'Frontpage'
+	          )
 	        ),
 	        _react2.default.createElement(
-	          'ul',
-	          { className: 'list-unstyled' },
+	          'li',
+	          null,
 	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/' },
-	              'Frontpage'
-	            ),
-	            _react2.default.createElement('br', null)
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            _react2.default.createElement(
-	              _reactRouter.Link,
-	              { to: '/r/aww' },
-	              'Awwww'
-	            )
+	            _reactRouter.Link,
+	            { to: '/r/aww', className: 'btn' },
+	            'Awwww'
 	          )
 	        )
 	      )
@@ -316,8 +311,12 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'container-fluid' },
-	      _react2.default.createElement(SubLinks, null),
-	      _react2.default.createElement(Subreddit, { location: window.location.pathname })
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(SubLinks, null),
+	        _react2.default.createElement(Subreddit, { location: window.location.pathname })
+	      )
 	    );
 	  }
 	});
