@@ -36,6 +36,14 @@ html, body {
   color: black;
 }
 
+.story-link {
+  color: white;
+}
+
+a.story-link, a.story-link:active, a.story-link:visited, a.story-link:hover {
+  color: white;
+}
+
 .story {
   padding: 10px;
 }

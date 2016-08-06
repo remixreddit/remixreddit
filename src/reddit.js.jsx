@@ -84,7 +84,7 @@ var Story = React.createClass({
           {this.props.story.score}
         </div>
         <div className="col-xs-11">
-          <a href={this.props.story.url}>
+          <a href={this.props.story.url} class="story-link">
             {this.props.story.title}
           </a>
           &nbsp;

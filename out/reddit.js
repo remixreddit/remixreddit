@@ -157,7 +157,7 @@
 	        { className: 'col-xs-11' },
 	        _react2.default.createElement(
 	          'a',
-	          { href: this.props.story.url },
+	          { href: this.props.story.url, 'class': 'story-link' },
 	          this.props.story.title
 	        ),
 	        ' ',
