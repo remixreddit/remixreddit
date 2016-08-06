@@ -41,8 +41,21 @@ html, body {
   color: black;
 }
 
+.story-header {
+  padding-bottom: 10px;
+  font-size: 18px;
+  padding-top: 0;
+}
+
+.story-link {
+}
+
 .story-link, .story-link:active, .story-link:visited, .story-link:hover {
-  color: black;
+  color: blue;
+}
+
+.story-author {
+  color: #aaa;
 }
 
 .story {

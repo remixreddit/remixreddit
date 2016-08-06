@@ -86,13 +86,20 @@ var Story = React.createClass({
           </div>
         </div>
         <div className="col-xs-10">
-          <a href={this.props.story.url} class="story-link">
-            {this.props.story.title}
-          </a>
-          &nbsp;
-          {this.props.story.author}
-          <br/>
-          <StoryPreview story={this.props.story} />
+          <div className="row">
+            <div className="col-xs-12 story-header">
+              <a href={this.props.story.url} className="story-link">
+                {this.props.story.title}
+              </a>
+              &nbsp;
+              <span className="story-author">
+                {this.props.story.author}
+              </span>
+            </div>
+            <div className="col-xs-12">
+              <StoryPreview story={this.props.story} />
+            </div>
+          </div>
         </div>
       </div>
     );

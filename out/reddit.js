@@ -160,14 +160,29 @@
 	        'div',
 	        { className: 'col-xs-10' },
 	        _react2.default.createElement(
-	          'a',
-	          { href: this.props.story.url, 'class': 'story-link' },
-	          this.props.story.title
-	        ),
-	        ' ',
-	        this.props.story.author,
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(StoryPreview, { story: this.props.story })
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-xs-12 story-header' },
+	            _react2.default.createElement(
+	              'a',
+	              { href: this.props.story.url, className: 'story-link' },
+	              this.props.story.title
+	            ),
+	            ' ',
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'story-author' },
+	              this.props.story.author
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-xs-12' },
+	            _react2.default.createElement(StoryPreview, { story: this.props.story })
+	          )
+	        )
 	      )
 	    );
 	  }
