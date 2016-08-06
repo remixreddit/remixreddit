@@ -142,7 +142,7 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'row', key: this.props.story.name },
+	      { className: 'row story', key: this.props.story.name },
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'col-xs-1' },
@@ -179,8 +179,12 @@
 
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'container' },
-	      storyNodes
+	      { className: 'row' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'col-xs-12' },
+	        storyNodes
+	      )
 	    );
 	  }
 	});
@@ -191,25 +195,37 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'sublinks' },
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        'hello'
-	      ),
+	      { className: 'row sublinks' },
 	      _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'col-xs-12' },
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/' },
-	          'Frontpage'
+	          'h1',
+	          { className: 'title' },
+	          'Reddit'
 	        ),
-	        _react2.default.createElement('br', null),
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/r/aww' },
-	          'Awwww'
+	          'ul',
+	          { className: 'list-unstyled' },
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/' },
+	              'Frontpage'
+	            ),
+	            _react2.default.createElement('br', null)
+	          ),
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/r/aww' },
+	              'Awwww'
+	            )
+	          )
 	        )
 	      )
 	    );
@@ -296,20 +312,8 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'container-fluid' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'row' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-xs-1' },
-	          _react2.default.createElement(SubLinks, null)
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'col-xs-11' },
-	          _react2.default.createElement(Subreddit, { location: window.location.pathname })
-	        )
-	      )
+	      _react2.default.createElement(SubLinks, null),
+	      _react2.default.createElement(Subreddit, { location: window.location.pathname })
 	    );
 	  }
 	});

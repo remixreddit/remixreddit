@@ -75,7 +75,7 @@ var StoryPreview = React.createClass({
 var Story = React.createClass({
   render: function() {
     return (
-      <div className="row" key={this.props.story.name}>
+      <div className="row story" key={this.props.story.name}>
         <div className="col-xs-1">
           {this.props.story.score}
         </div>
@@ -105,8 +105,10 @@ var StoryList = React.createClass({
     }));
 
     return (
-      <div className="container">
-        {storyNodes}
+      <div className="row">
+        <div className="col-xs-12">
+          {storyNodes}
+        </div>
       </div>
     );
   },
@@ -115,13 +117,19 @@ var StoryList = React.createClass({
 var SubLinks = React.createClass({
   render: function() {
     return (
-      <div className="sublinks">
-        <h1>
-          hello
-        </h1>
-        <div>
-          <Link to="/">Frontpage</Link><br />
-          <Link to="/r/aww">Awwww</Link>
+      <div className="row sublinks">
+        <div className="col-xs-12">
+          <h1 className="title">
+            Reddit
+          </h1>
+          <ul className="list-unstyled">
+            <li>
+              <Link to="/">Frontpage</Link><br />
+            </li>
+            <li>
+              <Link to="/r/aww">Awwww</Link>
+            </li>
+          </ul>
         </div>
       </div>
     );
@@ -205,14 +213,8 @@ var App = React.createClass({
   render: function() {
     return (
       <div className="container-fluid">
-        <div className="row">
-          <div className="col-xs-1">
-            <SubLinks />
-          </div>
-          <div className="col-xs-11">
-            <Subreddit location={window.location.pathname} />
-          </div>
-        </div>
+        <SubLinks />
+        <Subreddit location={window.location.pathname} />
       </div>
     );
   }
