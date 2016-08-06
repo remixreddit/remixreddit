@@ -40,7 +40,7 @@ html, body {
   color: white;
 }
 
-a.story-link, a.story-link:active, a.story-link:visited, a.story-link:hover {
+.story-link, .story-link:active, .story-link:visited, .story-link:hover {
   color: white;
 }
 
