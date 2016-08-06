@@ -96,6 +96,13 @@
 	var StoryPreview = _react2.default.createClass({
 	  displayName: 'StoryPreview',
 
+
+	  directLink: function directLink() {
+	    var parser = document.createElement('a');
+	    parser.href = this.props.story.url;
+	    return parser.hostname == "i.imgur.com";
+	  },
+
 	  render: function render() {
 	    var _this = this;
 
@@ -114,10 +121,7 @@
 	          _react2.default.createElement('div', { dangerouslySetInnerHTML: getEmbed() })
 	        );
 	      } else {
-	        var parser = document.createElement('a');
-	        parser.href = _this.props.story.url;
-
-	        if (parser.hostname == "i.imgur.com") {
+	        if (this.directLink()) {
 	          var previewUrl = _this.props.story.url.replace("gifv", "gif");
 	        } else {
 	          var previewUrl = _this.props.story.preview.images[0].source.url;

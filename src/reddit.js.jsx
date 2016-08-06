@@ -27,6 +27,13 @@ var decodeEntities = (function() {
 })();
 
 var StoryPreview = React.createClass({
+
+  directLink: function() {
+    var parser = document.createElement('a');
+    parser.href = this.props.story.url;
+    return parser.hostname == "i.imgur.com";
+  },
+
   render: function() {
     var _this = this;
 
@@ -46,10 +53,7 @@ var StoryPreview = React.createClass({
         );
       }
       else {
-        var parser = document.createElement('a');
-        parser.href = _this.props.story.url;
-
-        if (parser.hostname == "i.imgur.com") {
+        if (this.directLink()) {
           var previewUrl = _this.props.story.url.replace("gifv", "gif");
         }
         else {
