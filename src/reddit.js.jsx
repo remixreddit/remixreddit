@@ -130,7 +130,16 @@ var SubLinks = React.createClass({
             <Link to="/" className="btn">Frontpage</Link>
           </li>
           <li>
-            <Link to="/r/aww" className="btn">Awwww</Link>
+            <Link to="/r/aww" className="btn">Aww</Link>
+          </li>
+          <li>
+            <Link to="/r/funny" className="btn">Funny</Link>
+          </li>
+          <li>
+            <Link to="/r/pics" className="btn">Pics</Link>
+          </li>
+          <li>
+            <Link to="/r/videos" className="btn">Videos</Link>
           </li>
         </ul>
       </div>

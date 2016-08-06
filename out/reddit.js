@@ -223,7 +223,34 @@
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/r/aww', className: 'btn' },
-	            'Awwww'
+	            'Aww'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/r/funny', className: 'btn' },
+	            'Funny'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/r/pics', className: 'btn' },
+	            'Pics'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/r/videos', className: 'btn' },
+	            'Videos'
 	          )
 	        )
 	      )
