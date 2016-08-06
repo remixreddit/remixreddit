@@ -96,6 +96,11 @@ var Story = React.createClass({
                 {this.props.story.author}
               </span>
             </div>
+            <div className="col-xs-12 story-subheader">
+              <a href={this.props.story.permalink}>
+                {this.props.story.num_comments} comments
+              </a>
+            </div>
             <div className="col-xs-12">
               <StoryPreview story={this.props.story} />
             </div>

@@ -179,6 +179,16 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
+	            { className: 'col-xs-12 story-subheader' },
+	            _react2.default.createElement(
+	              'a',
+	              { href: this.props.story.permalink },
+	              this.props.story.num_comments,
+	              ' comments'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
 	            { className: 'col-xs-12' },
 	            _react2.default.createElement(StoryPreview, { story: this.props.story })
 	          )
